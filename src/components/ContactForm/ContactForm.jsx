@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './ContactForm.module.css';
+import { Notify } from 'notiflix';
 
-import { addContact } from '../../redux/contactsOperations';
+import { addContact } from '../../redux/contacts/contactsOperations';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectorItems } from '../../redux/selectors';
+import { selectorItems } from '../../redux/contacts/selectors';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -34,7 +35,7 @@ export const ContactForm = () => {
 
     const includeName = contacts.find(user => user.name === name);
     if (includeName) {
-      alert(`${name} is already in contacs`);
+      Notify.failure(`${name} is already in contacs`);
       return;
     }
 
